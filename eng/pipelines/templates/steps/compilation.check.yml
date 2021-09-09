@@ -16,7 +16,7 @@ steps:
   - pwsh: |
       $pomfDir = "$(Pipeline.Workspace)/${{parameters.ArtifactName}}-signed/${{parameters.Artifact.groupId}}/${{parameters.Artifact.name}}"
       $pomf = Get-ChildItem "$pomfDir/*.pom"
-      Copy-Item "$(System.DefaultWorkingDirectory)/eng" "$pomfDir/eng" -Recurse
+      Copy-Item "/eng" "$pomfDir/eng" -Recurse
       while ($retries++ -lt ${{parameters.RetryLimit}}) {
         Write-Host "mvn -f $pomf install"
         mvn -f $pomf clean install
